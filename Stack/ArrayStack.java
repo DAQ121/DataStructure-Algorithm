@@ -4,9 +4,6 @@
 * @author:代澳旗
 */
 
-//抑制编译器警告
-@SuppressWarnings("all")
-
 public class ArrayStack {
     private String[] items;  // 定义数组
     private int count;       // 栈中元素个数
