@@ -58,6 +58,7 @@ public class ArrayStack {
         as.push("1");
         as.push("2");
         as.push("3");
+        as.push("4");
         System.out.println(as.pop());
     }
 }
