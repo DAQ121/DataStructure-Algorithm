@@ -23,7 +23,7 @@ public class ArrayStack {
      * @param item :入栈的数据元素
      */
     public boolean push(String item) {
-        // 栈满，返回 false，入栈失败。
+        // 栈中元素个数达到上限，栈满，返回 false，入栈失败。
         if (count == n){
             return false;
         }
