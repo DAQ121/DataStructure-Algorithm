@@ -1,11 +1,8 @@
 /**
 * 基于数组的顺序栈
 * 功能:入栈，出栈，输出栈
-* @author:代澳旗
+* @author:daiaoqi
 */
-
-//抑制编译器警告
-@SuppressWarnings("all")
 
 public class ArrayStack {
     private String[] items;  // 定义数组
@@ -26,7 +23,7 @@ public class ArrayStack {
      * @param item :入栈的数据元素
      */
     public boolean push(String item) {
-        // 栈满，返回 false，入栈失败。
+        // 栈中元素个数达到上限，栈满，返回 false，入栈失败。
         if (count == n){
             return false;
         }
@@ -61,6 +58,7 @@ public class ArrayStack {
         as.push("1");
         as.push("2");
         as.push("3");
+        as.push("4");
         System.out.println(as.pop());
     }
 }

@@ -1,7 +1,7 @@
 /**
  * 基于链表实现栈：链栈
  * 功能:入栈、出栈、输出栈
- * @author : 代澳旗
+ * @author : daiaoqi
  */
 @SuppressWarnings("all")
 public class ListStack {
