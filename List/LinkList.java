@@ -2,6 +2,21 @@ package com.daq.list;
 
 @SuppressWarnings("all")
 public class LinkList {
+    public static void main(String[] args) {
+        LinkList list = new LinkList();
+        list.addNode(1);
+        list.addNode(2);
+        list.addNode(3);
+        list.addNode(4);
+        list.addNode(5);     
+        list.addNodeByIndex(3,2.5);//在指定位置插入数据
+        list.printListFromHead();//打印链表
+        
+        list.deleteByIndex(3);//按照索引删除元素
+        list.printListFromHead();//打印链表
+        
+        System.out.println(list.getLength());//链表长度
+    }
 
     //结点类
     private class ListNode {
