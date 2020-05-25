@@ -1,7 +1,7 @@
 /**
 * 基于数组的顺序栈
 * 功能:入栈，出栈，输出栈
-* @author:代澳旗
+* @author:daiaoqi
 */
 
 public class ArrayStack {
