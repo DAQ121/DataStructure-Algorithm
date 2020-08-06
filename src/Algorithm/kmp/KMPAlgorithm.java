@@ -14,26 +14,25 @@ public class KMPAlgorithm {
 		System.out.println("next=" + Arrays.toString(next));
 		
 		int index = kmpSearch(str1, str2, next);
-		System.out.println("index=" + index); // 15ÁË
+		System.out.println("index=" + index); // 15äº†
 		
 		
 	}
 	
-	//Ğ´³öÎÒÃÇµÄkmpËÑË÷Ëã·¨
+	//å†™å‡ºæˆ‘ä»¬çš„kmpæœç´¢ç®—æ³•
 	/**
-	 * 
-	 * @param str1 Ô´×Ö·û´®
-	 * @param str2 ×Ó´®
-	 * @param next ²¿·ÖÆ¥Åä±í, ÊÇ×Ó´®¶ÔÓ¦µÄ²¿·ÖÆ¥Åä±í
-	 * @return Èç¹ûÊÇ-1¾ÍÊÇÃ»ÓĞÆ¥Åäµ½£¬·ñÔò·µ»ØµÚÒ»¸öÆ¥ÅäµÄÎ»ÖÃ
+	 * @param str1 æºå­—ç¬¦ä¸²
+	 * @param str2 å­ä¸²
+	 * @param next éƒ¨åˆ†åŒ¹é…è¡¨, æ˜¯å­ä¸²å¯¹åº”çš„éƒ¨åˆ†åŒ¹é…è¡¨
+	 * @return å¦‚æœæ˜¯-1å°±æ˜¯æ²¡æœ‰åŒ¹é…åˆ°ï¼Œå¦åˆ™è¿”å›ç¬¬ä¸€ä¸ªåŒ¹é…çš„ä½ç½®
 	 */
 	public static int kmpSearch(String str1, String str2, int[] next) {
 		
-		//±éÀú 
+		//éå† 
 		for(int i = 0, j = 0; i < str1.length(); i++) {
 			
-			//ĞèÒª´¦Àí str1.charAt(i) £¡= str2.charAt(j), È¥µ÷ÕûjµÄ´óĞ¡
-			//KMPËã·¨ºËĞÄµã, ¿ÉÒÔÑéÖ¤...
+			//éœ€è¦å¤„ç† str1.charAt(i) ï¼= str2.charAt(j), å»è°ƒæ•´jçš„å¤§å°
+			//KMPç®—æ³•æ ¸å¿ƒç‚¹, å¯ä»¥éªŒè¯...
 			while( j > 0 && str1.charAt(i) != str2.charAt(j)) {
 				j = next[j-1]; 
 			}
@@ -41,27 +40,27 @@ public class KMPAlgorithm {
 			if(str1.charAt(i) == str2.charAt(j)) {
 				j++;
 			}			
-			if(j == str2.length()) {//ÕÒµ½ÁË // j = 3 i 
+			if(j == str2.length()) {//æ‰¾åˆ°äº† // j = 3 i 
 				return i - j + 1;
 			}
 		}
 		return  -1;
 	}
 
-	//»ñÈ¡µ½Ò»¸ö×Ö·û´®(×Ó´®) µÄ²¿·ÖÆ¥ÅäÖµ±í
+	//è·å–åˆ°ä¸€ä¸ªå­—ç¬¦ä¸²(å­ä¸²) çš„éƒ¨åˆ†åŒ¹é…å€¼è¡¨
 	public static  int[] kmpNext(String dest) {
-		//´´½¨Ò»¸önext Êı×é±£´æ²¿·ÖÆ¥ÅäÖµ
+		//åˆ›å»ºä¸€ä¸ªnext æ•°ç»„ä¿å­˜éƒ¨åˆ†åŒ¹é…å€¼
 		int[] next = new int[dest.length()];
-		next[0] = 0; //Èç¹û×Ö·û´®ÊÇ³¤¶ÈÎª1 ²¿·ÖÆ¥ÅäÖµ¾ÍÊÇ0
+		next[0] = 0; //å¦‚æœå­—ç¬¦ä¸²æ˜¯é•¿åº¦ä¸º1 éƒ¨åˆ†åŒ¹é…å€¼å°±æ˜¯0
 		for(int i = 1, j = 0; i < dest.length(); i++) {
-			//µ±dest.charAt(i) != dest.charAt(j) £¬ÎÒÃÇĞèÒª´Ónext[j-1]»ñÈ¡ĞÂµÄj
-			//Ö±µ½ÎÒÃÇ·¢ÏÖ ÓĞ  dest.charAt(i) == dest.charAt(j)³ÉÁ¢²ÅÍË³ö
-			//ÕâÊ±kmpËã·¨µÄºËĞÄµã
+			//å½“dest.charAt(i) != dest.charAt(j) ï¼Œæˆ‘ä»¬éœ€è¦ä»next[j-1]è·å–æ–°çš„j
+			//ç›´åˆ°æˆ‘ä»¬å‘ç° æœ‰  dest.charAt(i) == dest.charAt(j)æˆç«‹æ‰é€€å‡º
+			//è¿™æ—¶kmpç®—æ³•çš„æ ¸å¿ƒç‚¹
 			while(j > 0 && dest.charAt(i) != dest.charAt(j)) {
 				j = next[j-1];
 			}
 			
-			//µ±dest.charAt(i) == dest.charAt(j) Âú×ãÊ±£¬²¿·ÖÆ¥ÅäÖµ¾ÍÊÇ+1
+			//å½“dest.charAt(i) == dest.charAt(j) æ»¡è¶³æ—¶ï¼Œéƒ¨åˆ†åŒ¹é…å€¼å°±æ˜¯+1
 			if(dest.charAt(i) == dest.charAt(j)) {
 				j++;
 			}
