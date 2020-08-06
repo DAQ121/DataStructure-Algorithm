@@ -4,15 +4,15 @@ import java.util.Arrays;
 
 public class KruskalCase {
 
-	private int edgeNum; //±ßµÄ¸öÊı
-	private char[] vertexs; //¶¥µãÊı×é
-	private int[][] matrix; //ÁÚ½Ó¾ØÕó
-	//Ê¹ÓÃ INF ±íÊ¾Á½¸ö¶¥µã²»ÄÜÁ¬Í¨
+	private int edgeNum; //è¾¹çš„ä¸ªæ•°
+	private char[] vertexs; //é¡¶ç‚¹æ•°ç»„
+	private int[][] matrix; //é‚»æ¥çŸ©é˜µ
+	//ä½¿ç”¨ INF è¡¨ç¤ºä¸¤ä¸ªé¡¶ç‚¹ä¸èƒ½è¿é€š
 	private static final int INF = Integer.MAX_VALUE;
 	
 	public static void main(String[] args) {
 		char[] vertexs = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
-		//¿ËÂ³Ë¹¿¨¶ûËã·¨µÄÁÚ½Ó¾ØÕó  
+		//å…‹é²æ–¯å¡å°”ç®—æ³•çš„é‚»æ¥çŸ©é˜µ  
 	      int matrix[][] = {
 	      /*A*//*B*//*C*//*D*//*E*//*F*//*G*/
 	/*A*/ {   0,  12, INF, INF, INF,  16,  14},
@@ -22,35 +22,35 @@ public class KruskalCase {
 	/*E*/ { INF, INF,   5,   4,   0,   2,   8},
 	/*F*/ {  16,   7,   6, INF,   2,   0,   9},
 	/*G*/ {  14, INF, INF, INF,   8,   9,   0}}; 
-	      //´ó¼Ò¿ÉÒÔÔÚÈ¥²âÊÔÆäËüµÄÁÚ½Ó¾ØÕó£¬½á¹û¶¼¿ÉÒÔµÃµ½×îĞ¡Éú³ÉÊ÷.
+	      //å¤§å®¶å¯ä»¥åœ¨å»æµ‹è¯•å…¶å®ƒçš„é‚»æ¥çŸ©é˜µï¼Œç»“æœéƒ½å¯ä»¥å¾—åˆ°æœ€å°ç”Ÿæˆæ ‘.
 	      
-	      //´´½¨KruskalCase ¶ÔÏóÊµÀı
+	      //åˆ›å»ºKruskalCase å¯¹è±¡å®ä¾‹
 	      KruskalCase kruskalCase = new KruskalCase(vertexs, matrix);
-	      //Êä³ö¹¹½¨µÄ
+	      //è¾“å‡ºæ„å»ºçš„
 	      kruskalCase.print();
 	      kruskalCase.kruskal();
 	      
 	}
 	
-	//¹¹ÔìÆ÷
+	//æ„é€ å™¨
 	public KruskalCase(char[] vertexs, int[][] matrix) {
-		//³õÊ¼»¯¶¥µãÊıºÍ±ßµÄ¸öÊı
+		//åˆå§‹åŒ–é¡¶ç‚¹æ•°å’Œè¾¹çš„ä¸ªæ•°
 		int vlen = vertexs.length;
 		
-		//³õÊ¼»¯¶¥µã, ¸´ÖÆ¿½±´µÄ·½Ê½
+		//åˆå§‹åŒ–é¡¶ç‚¹, å¤åˆ¶æ‹·è´çš„æ–¹å¼
 		this.vertexs = new char[vlen];
 		for(int i = 0; i < vertexs.length; i++) {
 			this.vertexs[i] = vertexs[i];
 		}
 		
-		//³õÊ¼»¯±ß, Ê¹ÓÃµÄÊÇ¸´ÖÆ¿½±´µÄ·½Ê½
+		//åˆå§‹åŒ–è¾¹, ä½¿ç”¨çš„æ˜¯å¤åˆ¶æ‹·è´çš„æ–¹å¼
 		this.matrix = new int[vlen][vlen];
 		for(int i = 0; i < vlen; i++) {
 			for(int j= 0; j < vlen; j++) {
 				this.matrix[i][j] = matrix[i][j];
 			}
 		}
-		//Í³¼Æ±ßµÄÌõÊı
+		//ç»Ÿè®¡è¾¹çš„æ¡æ•°
 		for(int i =0; i < vlen; i++) {
 			for(int j = i+1; j < vlen; j++) {
 				if(this.matrix[i][j] != INF) {
@@ -61,38 +61,38 @@ public class KruskalCase {
 		
 	}
 	public void kruskal() {
-		int index = 0; //±íÊ¾×îºó½á¹ûÊı×éµÄË÷Òı
-		int[] ends = new int[edgeNum]; //ÓÃÓÚ±£´æ"ÒÑÓĞ×îĞ¡Éú³ÉÊ÷" ÖĞµÄÃ¿¸ö¶¥µãÔÚ×îĞ¡Éú³ÉÊ÷ÖĞµÄÖÕµã
-		//´´½¨½á¹ûÊı×é, ±£´æ×îºóµÄ×îĞ¡Éú³ÉÊ÷
+		int index = 0; //è¡¨ç¤ºæœ€åç»“æœæ•°ç»„çš„ç´¢å¼•
+		int[] ends = new int[edgeNum]; //ç”¨äºä¿å­˜"å·²æœ‰æœ€å°ç”Ÿæˆæ ‘" ä¸­çš„æ¯ä¸ªé¡¶ç‚¹åœ¨æœ€å°ç”Ÿæˆæ ‘ä¸­çš„ç»ˆç‚¹
+		//åˆ›å»ºç»“æœæ•°ç»„, ä¿å­˜æœ€åçš„æœ€å°ç”Ÿæˆæ ‘
 		EData[] rets = new EData[edgeNum];
 		
-		//»ñÈ¡Í¼ÖĞ ËùÓĞµÄ±ßµÄ¼¯ºÏ £¬ Ò»¹²ÓĞ12±ß
+		//è·å–å›¾ä¸­ æ‰€æœ‰çš„è¾¹çš„é›†åˆ ï¼Œä¸€å…±æœ‰12è¾¹
 		EData[] edges = getEdges();
-		System.out.println("Í¼µÄ±ßµÄ¼¯ºÏ=" + Arrays.toString(edges) + " ¹²"+ edges.length); //12
+		System.out.println("å›¾çš„è¾¹çš„é›†åˆ=" + Arrays.toString(edges) + " å…±"+ edges.length); //12
 		
-		//°´ÕÕ±ßµÄÈ¨Öµ´óĞ¡½øĞĞÅÅĞò(´ÓĞ¡µ½´ó)
+		//æŒ‰ç…§è¾¹çš„æƒå€¼å¤§å°è¿›è¡Œæ’åº(ä»å°åˆ°å¤§)
 		sortEdges(edges);
 		
-		//±éÀúedges Êı×é£¬½«±ßÌí¼Óµ½×îĞ¡Éú³ÉÊ÷ÖĞÊ±£¬ÅĞ¶ÏÊÇ×¼±¸¼ÓÈëµÄ±ß·ñĞÎ³ÉÁË»ØÂ·£¬Èç¹ûÃ»ÓĞ£¬¾Í¼ÓÈë rets, ·ñÔò²»ÄÜ¼ÓÈë
+		//éå†edges æ•°ç»„ï¼Œå°†è¾¹æ·»åŠ åˆ°æœ€å°ç”Ÿæˆæ ‘ä¸­æ—¶ï¼Œåˆ¤æ–­æ˜¯å‡†å¤‡åŠ å…¥çš„è¾¹å¦å½¢æˆäº†å›è·¯ï¼Œå¦‚æœæ²¡æœ‰ï¼Œå°±åŠ å…¥ rets, å¦åˆ™ä¸èƒ½åŠ å…¥
 		for(int i=0; i < edgeNum; i++) {
-			//»ñÈ¡µ½µÚiÌõ±ßµÄµÚÒ»¸ö¶¥µã(Æğµã)
+			//è·å–åˆ°ç¬¬iæ¡è¾¹çš„ç¬¬ä¸€ä¸ªé¡¶ç‚¹(èµ·ç‚¹)
 			int p1 = getPosition(edges[i].start); //p1=4
-			//»ñÈ¡µ½µÚiÌõ±ßµÄµÚ2¸ö¶¥µã
+			//è·å–åˆ°ç¬¬iæ¡è¾¹çš„ç¬¬2ä¸ªé¡¶ç‚¹
 			int p2 = getPosition(edges[i].end); //p2 = 5
 			
-			//»ñÈ¡p1Õâ¸ö¶¥µãÔÚÒÑÓĞ×îĞ¡Éú³ÉÊ÷ÖĞµÄÖÕµã
+			//è·å–p1è¿™ä¸ªé¡¶ç‚¹åœ¨å·²æœ‰æœ€å°ç”Ÿæˆæ ‘ä¸­çš„ç»ˆç‚¹
 			int m = getEnd(ends, p1); //m = 4
-			//»ñÈ¡p2Õâ¸ö¶¥µãÔÚÒÑÓĞ×îĞ¡Éú³ÉÊ÷ÖĞµÄÖÕµã
+			//è·å–p2è¿™ä¸ªé¡¶ç‚¹åœ¨å·²æœ‰æœ€å°ç”Ÿæˆæ ‘ä¸­çš„ç»ˆç‚¹
 			int n = getEnd(ends, p2); // n = 5
-			//ÊÇ·ñ¹¹³É»ØÂ·
-			if(m != n) { //Ã»ÓĞ¹¹³É»ØÂ·
-				ends[m] = n; // ÉèÖÃm ÔÚ"ÒÑÓĞ×îĞ¡Éú³ÉÊ÷"ÖĞµÄÖÕµã <E,F> [0,0,0,0,5,0,0,0,0,0,0,0]
-				rets[index++] = edges[i]; //ÓĞÒ»Ìõ±ß¼ÓÈëµ½retsÊı×é
+			//æ˜¯å¦æ„æˆå›è·¯
+			if(m != n) { //æ²¡æœ‰æ„æˆå›è·¯
+				ends[m] = n; // è®¾ç½®m åœ¨"å·²æœ‰æœ€å°ç”Ÿæˆæ ‘"ä¸­çš„ç»ˆç‚¹ <E,F> [0,0,0,0,5,0,0,0,0,0,0,0]
+				rets[index++] = edges[i]; //æœ‰ä¸€æ¡è¾¹åŠ å…¥åˆ°retsæ•°ç»„
 			}
 		}
-		//<E,F> <C,D> <D,E> <B,F> <E,G> <A,B>¡£
-		//Í³¼Æ²¢´òÓ¡ "×îĞ¡Éú³ÉÊ÷", Êä³ö  rets
-		System.out.println("×îĞ¡Éú³ÉÊ÷Îª");
+		//<E,F> <C,D> <D,E> <B,F> <E,G> <A,B>ã€‚
+		//ç»Ÿè®¡å¹¶æ‰“å° "æœ€å°ç”Ÿæˆæ ‘", è¾“å‡º  rets
+		System.out.println("æœ€å°ç”Ÿæˆæ ‘ä¸º");
 		for(int i = 0; i < index; i++) {
 			System.out.println(rets[i]);
 		}
@@ -100,25 +100,25 @@ public class KruskalCase {
 		
 	}
 	
-	//´òÓ¡ÁÚ½Ó¾ØÕó
+	//æ‰“å°é‚»æ¥çŸ©é˜µ
 	public void print() {
-		System.out.println("ÁÚ½Ó¾ØÕóÎª: \n");
+		System.out.println("é‚»æ¥çŸ©é˜µä¸º: \n");
 		for(int i = 0; i < vertexs.length; i++) {
 			for(int j=0; j < vertexs.length; j++) {
 				System.out.printf("%12d", matrix[i][j]);
 			}
-			System.out.println();//»»ĞĞ
+			System.out.println();//æ¢è¡Œ
 		}
 	}
 
 	/**
-	 * ¹¦ÄÜ£º¶Ô±ß½øĞĞÅÅĞò´¦Àí, Ã°ÅİÅÅĞò
-	 * @param edges ±ßµÄ¼¯ºÏ
+	 * åŠŸèƒ½ï¼šå¯¹è¾¹è¿›è¡Œæ’åºå¤„ç†, å†’æ³¡æ’åº
+	 * @param edges è¾¹çš„é›†åˆ
 	 */
 	private void sortEdges(EData[] edges) {
 		for(int i = 0; i < edges.length - 1; i++) {
 			for(int j = 0; j < edges.length - 1 - i; j++) {
-				if(edges[j].weight > edges[j+1].weight) {//½»»»
+				if(edges[j].weight > edges[j+1].weight) {//äº¤æ¢
 					EData tmp = edges[j];
 					edges[j] = edges[j+1];
 					edges[j+1] = tmp;
@@ -128,22 +128,22 @@ public class KruskalCase {
 	}
 	/**
 	 * 
-	 * @param ch ¶¥µãµÄÖµ£¬±ÈÈç'A','B'
-	 * @return ·µ»Øch¶¥µã¶ÔÓ¦µÄÏÂ±ê£¬Èç¹ûÕÒ²»µ½£¬·µ»Ø-1
+	 * @param ch é¡¶ç‚¹çš„å€¼ï¼Œæ¯”å¦‚'A','B'
+	 * @return è¿”å›ché¡¶ç‚¹å¯¹åº”çš„ä¸‹æ ‡ï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œè¿”å›-1
 	 */
 	private int getPosition(char ch) {
 		for(int i = 0; i < vertexs.length; i++) {
-			if(vertexs[i] == ch) {//ÕÒµ½
+			if(vertexs[i] == ch) {//æ‰¾åˆ°
 				return i;
 			}
 		}
-		//ÕÒ²»µ½,·µ»Ø-1
+		//æ‰¾ä¸åˆ°,è¿”å›-1
 		return -1;
 	}
 	/**
-	 * ¹¦ÄÜ: »ñÈ¡Í¼ÖĞ±ß£¬·Åµ½EData[] Êı×éÖĞ£¬ºóÃæÎÒÃÇĞèÒª±éÀú¸ÃÊı×é
-	 * ÊÇÍ¨¹ımatrix ÁÚ½Ó¾ØÕóÀ´»ñÈ¡
-	 * EData[] ĞÎÊ½ [['A','B', 12], ['B','F',7], .....]
+	 * åŠŸèƒ½: è·å–å›¾ä¸­è¾¹ï¼Œæ”¾åˆ°EData[] æ•°ç»„ä¸­ï¼Œåé¢æˆ‘ä»¬éœ€è¦éå†è¯¥æ•°ç»„
+	 * æ˜¯é€šè¿‡matrix é‚»æ¥çŸ©é˜µæ¥è·å–
+	 * EData[] å½¢å¼ [['A','B', 12], ['B','F',7], .....]
 	 * @return
 	 */
 	private EData[] getEdges() {
@@ -159,10 +159,10 @@ public class KruskalCase {
 		return edges;
 	}
 	/**
-	 * ¹¦ÄÜ: »ñÈ¡ÏÂ±êÎªiµÄ¶¥µãµÄÖÕµã(), ÓÃÓÚºóÃæÅĞ¶ÏÁ½¸ö¶¥µãµÄÖÕµãÊÇ·ñÏàÍ¬
-	 * @param ends £º Êı×é¾ÍÊÇ¼ÇÂ¼ÁË¸÷¸ö¶¥µã¶ÔÓ¦µÄÖÕµãÊÇÄÄ¸ö,ends Êı×éÊÇÔÚ±éÀú¹ı³ÌÖĞ£¬Öğ²½ĞÎ³É
-	 * @param i : ±íÊ¾´«ÈëµÄ¶¥µã¶ÔÓ¦µÄÏÂ±ê
-	 * @return ·µ»ØµÄ¾ÍÊÇ ÏÂ±êÎªiµÄÕâ¸ö¶¥µã¶ÔÓ¦µÄÖÕµãµÄÏÂ±ê, Ò»»á»ØÍ·»¹ÓĞÀ´Àí½â
+	 * åŠŸèƒ½: è·å–ä¸‹æ ‡ä¸ºiçš„é¡¶ç‚¹çš„ç»ˆç‚¹(), ç”¨äºåé¢åˆ¤æ–­ä¸¤ä¸ªé¡¶ç‚¹çš„ç»ˆç‚¹æ˜¯å¦ç›¸åŒ
+	 * @param ends ï¼š æ•°ç»„å°±æ˜¯è®°å½•äº†å„ä¸ªé¡¶ç‚¹å¯¹åº”çš„ç»ˆç‚¹æ˜¯å“ªä¸ª,ends æ•°ç»„æ˜¯åœ¨éå†è¿‡ç¨‹ä¸­ï¼Œé€æ­¥å½¢æˆ
+	 * @param i : è¡¨ç¤ºä¼ å…¥çš„é¡¶ç‚¹å¯¹åº”çš„ä¸‹æ ‡
+	 * @return è¿”å›çš„å°±æ˜¯ ä¸‹æ ‡ä¸ºiçš„è¿™ä¸ªé¡¶ç‚¹å¯¹åº”çš„ç»ˆç‚¹çš„ä¸‹æ ‡, ä¸€ä¼šå›å¤´è¿˜æœ‰æ¥ç†è§£
 	 */
 	private int getEnd(int[] ends, int i) { // i = 4 [0,0,0,0,5,0,0,0,0,0,0,0]
 		while(ends[i] != 0) {
@@ -173,18 +173,18 @@ public class KruskalCase {
  
 }
 
-//´´½¨Ò»¸öÀàEData £¬ËüµÄ¶ÔÏóÊµÀı¾Í±íÊ¾Ò»Ìõ±ß
+//åˆ›å»ºä¸€ä¸ªç±»EData ï¼Œå®ƒçš„å¯¹è±¡å®ä¾‹å°±è¡¨ç¤ºä¸€æ¡è¾¹
 class EData {
-	char start; //±ßµÄÒ»¸öµã
-	char end; //±ßµÄÁíÍâÒ»¸öµã
-	int weight; //±ßµÄÈ¨Öµ
-	//¹¹ÔìÆ÷
+	char start; //è¾¹çš„ä¸€ä¸ªç‚¹
+	char end; //è¾¹çš„å¦å¤–ä¸€ä¸ªç‚¹
+	int weight; //è¾¹çš„æƒå€¼
+	//æ„é€ å™¨
 	public EData(char start, char end, int weight) {
 		this.start = start;
 		this.end = end;
 		this.weight = weight;
 	}
-	//ÖØĞ´toString, ±ãÓÚÊä³ö±ßĞÅÏ¢
+	//é‡å†™toString, ä¾¿äºè¾“å‡ºè¾¹ä¿¡æ¯
 	@Override
 	public String toString() {
 		return "EData [<" + start + ", " + end + ">= " + weight + "]";
