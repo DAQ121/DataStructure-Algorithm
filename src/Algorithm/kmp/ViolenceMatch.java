@@ -3,16 +3,15 @@ package Algorithm.kmp;
 public class ViolenceMatch {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//²âÊÔ±©Á¦Æ¥ÅäËã·¨
-		String str1 = "¹è¹è¹È ÉĞ¹è¹ÈÄãÉĞ¹è ÉĞ¹è¹ÈÄãÉĞ¹è¹ÈÄãÉĞ¹èÄãºÃ";
-		String str2 = "ÉĞ¹è¹ÈÄãÉĞ¹èÄã~";
+		//æµ‹è¯•æš´åŠ›åŒ¹é…ç®—æ³•
+		String str1 = "ç¡…ç¡…è°· å°šç¡…è°·ä½ å°šç¡… å°šç¡…è°·ä½ å°šç¡…è°·ä½ å°šç¡…ä½ å¥½";
+		String str2 = "å°šç¡…è°·ä½ å°šç¡…ä½ ~";
 		int index = violenceMatch(str1, str2);
 		System.out.println("index=" + index);
 
 	}
 
-	// ±©Á¦Æ¥ÅäËã·¨ÊµÏÖ
+	// æš´åŠ›åŒ¹é…ç®—æ³•å®ç°
 	public static int violenceMatch(String str1, String str2) {
 		char[] s1 = str1.toCharArray();
 		char[] s2 = str2.toCharArray();
@@ -20,21 +19,21 @@ public class ViolenceMatch {
 		int s1Len = s1.length;
 		int s2Len = s2.length;
 
-		int i = 0; // iË÷ÒıÖ¸Ïòs1
-		int j = 0; // jË÷ÒıÖ¸Ïòs2
-		while (i < s1Len && j < s2Len) {// ±£Ö¤Æ¥ÅäÊ±£¬²»Ô½½ç
+		int i = 0; // iç´¢å¼•æŒ‡å‘s1
+		int j = 0; // jç´¢å¼•æŒ‡å‘s2
+		while (i < s1Len && j < s2Len) {// ä¿è¯åŒ¹é…æ—¶ï¼Œä¸è¶Šç•Œ
 
-			if(s1[i] == s2[j]) {//Æ¥Åäok
+			if(s1[i] == s2[j]) {//åŒ¹é…ok
 				i++;
 				j++;
-			} else { //Ã»ÓĞÆ¥Åä³É¹¦
-				//Èç¹ûÊ§Åä£¨¼´str1[i]! = str2[j]£©£¬Áîi = i - (j - 1)£¬j = 0¡£
+			} else { //æ²¡æœ‰åŒ¹é…æˆåŠŸ
+				//å¦‚æœå¤±é…ï¼ˆå³str1[i]! = str2[j]ï¼‰ï¼Œä»¤i = i - (j - 1)ï¼Œj = 0ã€‚
 				i = i - (j - 1);
 				j = 0;
 			}
 		}
 		
-		//ÅĞ¶ÏÊÇ·ñÆ¥Åä³É¹¦
+		//åˆ¤æ–­æ˜¯å¦åŒ¹é…æˆåŠŸ
 		if(j == s2Len) {
 			return i - j;
 		} else {
