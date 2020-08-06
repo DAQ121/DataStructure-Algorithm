@@ -22,8 +22,8 @@
         ├─huffmancode      #哈夫曼编码
         ├─huffmantree      #哈夫曼树
         ├─linkedlist	   #单链表
-        ├─queue			   #队列
-        ├─recursion        #递归测试
+        ├─queue		   #队列
+        ├─recursion        #八皇后，迷宫问题，递归解决
         ├─reversepolishcal
         ├─search           #查找算法
         ├─sort             #排序算法
