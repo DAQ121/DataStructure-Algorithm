@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class PrimAlgorithm {
 
 	public static void main(String[] args) {
-		//²âÊÔ¿´¿´Í¼ÊÇ·ñ´´½¨ok
+		//æµ‹è¯•çœ‹çœ‹å›¾æ˜¯å¦åˆ›å»ºok
 		char[] data = new char[]{'A','B','C','D','E','F','G'};
 		int verxs = data.length;
-		//ÁÚ½Ó¾ØÕóµÄ¹ØÏµÊ¹ÓÃ¶şÎ¬Êı×é±íÊ¾,10000Õâ¸ö´óÊı£¬±íÊ¾Á½¸öµã²»ÁªÍ¨
+		//é‚»æ¥çŸ©é˜µçš„å…³ç³»ä½¿ç”¨äºŒç»´æ•°ç»„è¡¨ç¤º,10000è¿™ä¸ªå¤§æ•°ï¼Œè¡¨ç¤ºä¸¤ä¸ªç‚¹ä¸è”é€š
 		int [][]weight=new int[][]{
             {10000,5,7,10000,10000,10000,2},
             {5,10000,10000,9,10000,10000,3},
@@ -18,32 +18,31 @@ public class PrimAlgorithm {
             {10000,10000,10000,4,5,10000,6},
             {2,3,10000,10000,4,6,10000},};
             
-        //´´½¨MGraph¶ÔÏó
+        //åˆ›å»ºMGraphå¯¹è±¡
         MGraph graph = new MGraph(verxs);
-        //´´½¨Ò»¸öMinTree¶ÔÏó
+        //åˆ›å»ºä¸€ä¸ªMinTreeå¯¹è±¡
         MinTree minTree = new MinTree();
         minTree.createGraph(graph, verxs, data, weight);
-        //Êä³ö
+        //è¾“å‡º
         minTree.showGraph(graph);
-        //²âÊÔÆÕÀûÄ·Ëã·¨
+        //æµ‹è¯•æ™®åˆ©å§†ç®—æ³•
         minTree.prim(graph, 1);// 
 	}
 
 }
 
-//´´½¨×îĞ¡Éú³ÉÊ÷->´å×¯µÄÍ¼
+//åˆ›å»ºæœ€å°ç”Ÿæˆæ ‘->æ‘åº„çš„å›¾
 class MinTree {
-	//´´½¨Í¼µÄÁÚ½Ó¾ØÕó
+	//åˆ›å»ºå›¾çš„é‚»æ¥çŸ©é˜µ
 	/**
-	 * 
-	 * @param graph Í¼¶ÔÏó
-	 * @param verxs Í¼¶ÔÓ¦µÄ¶¥µã¸öÊı
-	 * @param data Í¼µÄ¸÷¸ö¶¥µãµÄÖµ
-	 * @param weight Í¼µÄÁÚ½Ó¾ØÕó
+	 * @param graph å›¾å¯¹è±¡
+	 * @param verxs å›¾å¯¹åº”çš„é¡¶ç‚¹ä¸ªæ•°
+	 * @param data å›¾çš„å„ä¸ªé¡¶ç‚¹çš„å€¼
+	 * @param weight å›¾çš„é‚»æ¥çŸ©é˜µ
 	 */
 	public void createGraph(MGraph graph, int verxs, char data[], int[][] weight) {
 		int i, j;
-		for(i = 0; i < verxs; i++) {//¶¥µã
+		for(i = 0; i < verxs; i++) {//é¡¶ç‚¹
 			graph.data[i] = data[i];
 			for(j = 0; j < verxs; j++) {
 				graph.weight[i][j] = weight[i][j];
@@ -51,51 +50,51 @@ class MinTree {
 		}
 	}
 	
-	//ÏÔÊ¾Í¼µÄÁÚ½Ó¾ØÕó
+	//æ˜¾ç¤ºå›¾çš„é‚»æ¥çŸ©é˜µ
 	public void showGraph(MGraph graph) {
 		for(int[] link: graph.weight) {
 			System.out.println(Arrays.toString(link));
 		}
 	}
 	
-	//±àĞ´primËã·¨£¬µÃµ½×îĞ¡Éú³ÉÊ÷
+	//ç¼–å†™primç®—æ³•ï¼Œå¾—åˆ°æœ€å°ç”Ÿæˆæ ‘
 	/**
 	 * 
-	 * @param graph Í¼
-	 * @param v ±íÊ¾´ÓÍ¼µÄµÚ¼¸¸ö¶¥µã¿ªÊ¼Éú³É'A'->0 'B'->1...
+	 * @param graph å›¾
+	 * @param v è¡¨ç¤ºä»å›¾çš„ç¬¬å‡ ä¸ªé¡¶ç‚¹å¼€å§‹ç”Ÿæˆ'A'->0 'B'->1...
 	 */
 	public void prim(MGraph graph, int v) {
-		//visited[] ±ê¼Ç½áµã(¶¥µã)ÊÇ·ñ±»·ÃÎÊ¹ı
+		//visited[] æ ‡è®°ç»“ç‚¹(é¡¶ç‚¹)æ˜¯å¦è¢«è®¿é—®è¿‡
 		int visited[] = new int[graph.verxs];
-		//visited[] Ä¬ÈÏÔªËØµÄÖµ¶¼ÊÇ0, ±íÊ¾Ã»ÓĞ·ÃÎÊ¹ı
+		//visited[] é»˜è®¤å…ƒç´ çš„å€¼éƒ½æ˜¯0, è¡¨ç¤ºæ²¡æœ‰è®¿é—®è¿‡
 //		for(int i =0; i <graph.verxs; i++) {
 //			visited[i] = 0;
 //		}
 		
-		//°Ñµ±Ç°Õâ¸ö½áµã±ê¼ÇÎªÒÑ·ÃÎÊ
+		//æŠŠå½“å‰è¿™ä¸ªç»“ç‚¹æ ‡è®°ä¸ºå·²è®¿é—®
 		visited[v] = 1;
-		//h1 ºÍ h2 ¼ÇÂ¼Á½¸ö¶¥µãµÄÏÂ±ê
+		//h1 å’Œ h2 è®°å½•ä¸¤ä¸ªé¡¶ç‚¹çš„ä¸‹æ ‡
 		int h1 = -1;
 		int h2 = -1;
-		int minWeight = 10000; //½« minWeight ³õÊ¼³ÉÒ»¸ö´óÊı£¬ºóÃæÔÚ±éÀú¹ı³ÌÖĞ£¬»á±»Ìæ»»
-		for(int k = 1; k < graph.verxs; k++) {//ÒòÎªÓĞ graph.verxs¶¥µã£¬ÆÕÀûÄ·Ëã·¨½áÊøºó£¬ÓĞ graph.verxs-1±ß
+		int minWeight = 10000; //å°† minWeight åˆå§‹æˆä¸€ä¸ªå¤§æ•°ï¼Œåé¢åœ¨éå†è¿‡ç¨‹ä¸­ï¼Œä¼šè¢«æ›¿æ¢
+		for(int k = 1; k < graph.verxs; k++) {//å› ä¸ºæœ‰ graph.verxsé¡¶ç‚¹ï¼Œæ™®åˆ©å§†ç®—æ³•ç»“æŸåï¼Œæœ‰ graph.verxs-1è¾¹
 			
-			//Õâ¸öÊÇÈ·¶¨Ã¿Ò»´ÎÉú³ÉµÄ×ÓÍ¼ £¬ºÍÄÄ¸ö½áµãµÄ¾àÀë×î½ü
-			for(int i = 0; i < graph.verxs; i++) {// i½áµã±íÊ¾±»·ÃÎÊ¹ıµÄ½áµã
-				for(int j = 0; j< graph.verxs;j++) {//j½áµã±íÊ¾»¹Ã»ÓĞ·ÃÎÊ¹ıµÄ½áµã
+			//è¿™ä¸ªæ˜¯ç¡®å®šæ¯ä¸€æ¬¡ç”Ÿæˆçš„å­å›¾ ï¼Œå’Œå“ªä¸ªç»“ç‚¹çš„è·ç¦»æœ€è¿‘
+			for(int i = 0; i < graph.verxs; i++) {// iç»“ç‚¹è¡¨ç¤ºè¢«è®¿é—®è¿‡çš„ç»“ç‚¹
+				for(int j = 0; j< graph.verxs;j++) {//jç»“ç‚¹è¡¨ç¤ºè¿˜æ²¡æœ‰è®¿é—®è¿‡çš„ç»“ç‚¹
 					if(visited[i] == 1 && visited[j] == 0 && graph.weight[i][j] < minWeight) {
-						//Ìæ»»minWeight(Ñ°ÕÒÒÑ¾­·ÃÎÊ¹ıµÄ½áµãºÍÎ´·ÃÎÊ¹ıµÄ½áµã¼äµÄÈ¨Öµ×îĞ¡µÄ±ß)
+						//æ›¿æ¢minWeight(å¯»æ‰¾å·²ç»è®¿é—®è¿‡çš„ç»“ç‚¹å’Œæœªè®¿é—®è¿‡çš„ç»“ç‚¹é—´çš„æƒå€¼æœ€å°çš„è¾¹)
 						minWeight = graph.weight[i][j];
 						h1 = i;
 						h2 = j;
 					}
 				}
 			}
-			//ÕÒµ½Ò»Ìõ±ßÊÇ×îĞ¡
-			System.out.println("±ß<" + graph.data[h1] + "," + graph.data[h2] + "> È¨Öµ:" + minWeight);
-			//½«µ±Ç°Õâ¸ö½áµã±ê¼ÇÎªÒÑ¾­·ÃÎÊ
+			//æ‰¾åˆ°ä¸€æ¡è¾¹æ˜¯æœ€å°
+			System.out.println("è¾¹<" + graph.data[h1] + "," + graph.data[h2] + "> æƒå€¼:" + minWeight);
+			//å°†å½“å‰è¿™ä¸ªç»“ç‚¹æ ‡è®°ä¸ºå·²ç»è®¿é—®
 			visited[h2] = 1;
-			//minWeight ÖØĞÂÉèÖÃÎª×î´óÖµ 10000
+			//minWeight é‡æ–°è®¾ç½®ä¸ºæœ€å¤§å€¼ 10000
 			minWeight = 10000;
 		}
 		
@@ -103,9 +102,9 @@ class MinTree {
 }
 
 class MGraph {
-	int verxs; //±íÊ¾Í¼µÄ½Úµã¸öÊı
-	char[] data;//´æ·Å½áµãÊı¾İ
-	int[][] weight; //´æ·Å±ß£¬¾ÍÊÇÎÒÃÇµÄÁÚ½Ó¾ØÕó
+	int verxs; //è¡¨ç¤ºå›¾çš„èŠ‚ç‚¹ä¸ªæ•°
+	char[] data;//å­˜æ”¾ç»“ç‚¹æ•°æ®
+	int[][] weight; //å­˜æ”¾è¾¹ï¼Œå°±æ˜¯æˆ‘ä»¬çš„é‚»æ¥çŸ©é˜µ
 	
 	public MGraph(int verxs) {
 		this.verxs = verxs;
