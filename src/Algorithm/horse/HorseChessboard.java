@@ -6,30 +6,30 @@ import java.util.Comparator;
 
 public class HorseChessboard {
 
-	private static int X; // ÆåÅÌµÄÁĞÊı
-	private static int Y; // ÆåÅÌµÄĞĞÊı
-	//´´½¨Ò»¸öÊı×é£¬±ê¼ÇÆåÅÌµÄ¸÷¸öÎ»ÖÃÊÇ·ñ±»·ÃÎÊ¹ı
+	private static int X; // æ£‹ç›˜çš„åˆ—æ•°
+	private static int Y; // æ£‹ç›˜çš„è¡Œæ•°
+	//åˆ›å»ºä¸€ä¸ªæ•°ç»„ï¼Œæ ‡è®°æ£‹ç›˜çš„å„ä¸ªä½ç½®æ˜¯å¦è¢«è®¿é—®è¿‡
 	private static boolean visited[];
-	//Ê¹ÓÃÒ»¸öÊôĞÔ£¬±ê¼ÇÊÇ·ñÆåÅÌµÄËùÓĞÎ»ÖÃ¶¼±»·ÃÎÊ
-	private static boolean finished; // Èç¹ûÎªtrue,±íÊ¾³É¹¦
+	//ä½¿ç”¨ä¸€ä¸ªå±æ€§ï¼Œæ ‡è®°æ˜¯å¦æ£‹ç›˜çš„æ‰€æœ‰ä½ç½®éƒ½è¢«è®¿é—®
+	private static boolean finished; // å¦‚æœä¸ºtrue,è¡¨ç¤ºæˆåŠŸ
 	
 	public static void main(String[] args) {
-		System.out.println("ÆïÊ¿ÖÜÓÎËã·¨£¬¿ªÊ¼ÔËĞĞ~~");
-		//²âÊÔÆïÊ¿ÖÜÓÎËã·¨ÊÇ·ñÕıÈ·
+		System.out.println("éª‘å£«å‘¨æ¸¸ç®—æ³•ï¼Œå¼€å§‹è¿è¡Œ~~");
+		//æµ‹è¯•éª‘å£«å‘¨æ¸¸ç®—æ³•æ˜¯å¦æ­£ç¡®
 		X = 8;
 		Y = 8;
-		int row = 1; //Âí¶ù³õÊ¼Î»ÖÃµÄĞĞ£¬´Ó1¿ªÊ¼±àºÅ
-		int column = 1; //Âí¶ù³õÊ¼Î»ÖÃµÄÁĞ£¬´Ó1¿ªÊ¼±àºÅ
-		//´´½¨ÆåÅÌ
+		int row = 1; //é©¬å„¿åˆå§‹ä½ç½®çš„è¡Œï¼Œä»1å¼€å§‹ç¼–å·
+		int column = 1; //é©¬å„¿åˆå§‹ä½ç½®çš„åˆ—ï¼Œä»1å¼€å§‹ç¼–å·
+		//åˆ›å»ºæ£‹ç›˜
 		int[][] chessboard = new int[X][Y];
-		visited = new boolean[X * Y];//³õÊ¼Öµ¶¼ÊÇfalse
-		//²âÊÔÒ»ÏÂºÄÊ±
+		visited = new boolean[X * Y];//åˆå§‹å€¼éƒ½æ˜¯false
+		//æµ‹è¯•ä¸€ä¸‹è€—æ—¶
 		long start = System.currentTimeMillis();
 		traversalChessboard(chessboard, row - 1, column - 1, 1);
 		long end = System.currentTimeMillis();
-		System.out.println("¹²ºÄÊ±: " + (end - start) + " ºÁÃë");
+		System.out.println("å…±è€—æ—¶: " + (end - start) + " æ¯«ç§’");
 		
-		//Êä³öÆåÅÌµÄ×îºóÇé¿ö
+		//è¾“å‡ºæ£‹ç›˜çš„æœ€åæƒ…å†µ
 		for(int[] rows : chessboard) {
 			for(int step: rows) {
 				System.out.print(step + "\t");
@@ -39,33 +39,33 @@ public class HorseChessboard {
 	}
 	
 	/**
-	 * Íê³ÉÆïÊ¿ÖÜÓÎÎÊÌâµÄËã·¨
-	 * @param chessboard ÆåÅÌ
-	 * @param row Âí¶ùµ±Ç°µÄÎ»ÖÃµÄĞĞ ´Ó0¿ªÊ¼ 
-	 * @param column Âí¶ùµ±Ç°µÄÎ»ÖÃµÄÁĞ  ´Ó0¿ªÊ¼
-	 * @param step ÊÇµÚ¼¸²½ ,³õÊ¼Î»ÖÃ¾ÍÊÇµÚ1²½ 
+	 * å®Œæˆéª‘å£«å‘¨æ¸¸é—®é¢˜çš„ç®—æ³•
+	 * @param chessboard æ£‹ç›˜
+	 * @param row é©¬å„¿å½“å‰çš„ä½ç½®çš„è¡Œ ä»0å¼€å§‹ 
+	 * @param column é©¬å„¿å½“å‰çš„ä½ç½®çš„åˆ—  ä»0å¼€å§‹
+	 * @param step æ˜¯ç¬¬å‡ æ­¥ ,åˆå§‹ä½ç½®å°±æ˜¯ç¬¬1æ­¥ 
 	 */
 	public static void traversalChessboard(int[][] chessboard, int row, int column, int step) {
 		chessboard[row][column] = step;
 		//row = 4 X = 8 column = 4 = 4 * 8 + 4 = 36
-		visited[row * X + column] = true; //±ê¼Ç¸ÃÎ»ÖÃÒÑ¾­·ÃÎÊ
-		//»ñÈ¡µ±Ç°Î»ÖÃ¿ÉÒÔ×ßµÄÏÂÒ»¸öÎ»ÖÃµÄ¼¯ºÏ 
+		visited[row * X + column] = true; //æ ‡è®°è¯¥ä½ç½®å·²ç»è®¿é—®
+		//è·å–å½“å‰ä½ç½®å¯ä»¥èµ°çš„ä¸‹ä¸€ä¸ªä½ç½®çš„é›†åˆ 
 		ArrayList<Point> ps = next(new Point(column, row));
-		//¶Ôps½øĞĞÅÅĞò,ÅÅĞòµÄ¹æÔò¾ÍÊÇ¶ÔpsµÄËùÓĞµÄPoint¶ÔÏóµÄÏÂÒ»²½µÄÎ»ÖÃµÄÊıÄ¿£¬½øĞĞ·Çµİ¼õÅÅĞò
+		//å¯¹psè¿›è¡Œæ’åº,æ’åºçš„è§„åˆ™å°±æ˜¯å¯¹psçš„æ‰€æœ‰çš„Pointå¯¹è±¡çš„ä¸‹ä¸€æ­¥çš„ä½ç½®çš„æ•°ç›®ï¼Œè¿›è¡Œéé€’å‡æ’åº
 		sort(ps);
-		//±éÀú ps
+		//éå† ps
 		while(!ps.isEmpty()) {
-			Point p = ps.remove(0);//È¡³öÏÂÒ»¸ö¿ÉÒÔ×ßµÄÎ»ÖÃ
-			//ÅĞ¶Ï¸ÃµãÊÇ·ñÒÑ¾­·ÃÎÊ¹ı
-			if(!visited[p.y * X + p.x]) {//ËµÃ÷»¹Ã»ÓĞ·ÃÎÊ¹ı
+			Point p = ps.remove(0);//å–å‡ºä¸‹ä¸€ä¸ªå¯ä»¥èµ°çš„ä½ç½®
+			//åˆ¤æ–­è¯¥ç‚¹æ˜¯å¦å·²ç»è®¿é—®è¿‡
+			if(!visited[p.y * X + p.x]) {//è¯´æ˜è¿˜æ²¡æœ‰è®¿é—®è¿‡
 				traversalChessboard(chessboard, p.y, p.x, step + 1);
 			}
 		}
-		//ÅĞ¶ÏÂí¶ùÊÇ·ñÍê³ÉÁËÈÎÎñ£¬Ê¹ÓÃ   step ºÍÓ¦¸Ã×ßµÄ²½Êı±È½Ï £¬ 
-		//Èç¹ûÃ»ÓĞ´ïµ½ÊıÁ¿£¬Ôò±íÊ¾Ã»ÓĞÍê³ÉÈÎÎñ£¬½«Õû¸öÆåÅÌÖÃ0
-		//ËµÃ÷: step < X * Y  ³ÉÁ¢µÄÇé¿öÓĞÁ½ÖÖ
-		//1. ÆåÅÌµ½Ä¿Ç°Î»ÖÃ,ÈÔÈ»Ã»ÓĞ×ßÍê
-		//2. ÆåÅÌ´¦ÓÚÒ»¸ö»ØËİ¹ı³Ì
+		//åˆ¤æ–­é©¬å„¿æ˜¯å¦å®Œæˆäº†ä»»åŠ¡ï¼Œä½¿ç”¨   step å’Œåº”è¯¥èµ°çš„æ­¥æ•°æ¯”è¾ƒ ï¼Œ 
+		//å¦‚æœæ²¡æœ‰è¾¾åˆ°æ•°é‡ï¼Œåˆ™è¡¨ç¤ºæ²¡æœ‰å®Œæˆä»»åŠ¡ï¼Œå°†æ•´ä¸ªæ£‹ç›˜ç½®0
+		//è¯´æ˜: step < X * Y  æˆç«‹çš„æƒ…å†µæœ‰ä¸¤ç§
+		//1. æ£‹ç›˜åˆ°ç›®å‰ä½ç½®,ä»ç„¶æ²¡æœ‰èµ°å®Œ
+		//2. æ£‹ç›˜å¤„äºä¸€ä¸ªå›æº¯è¿‡ç¨‹
 		if(step < X * Y && !finished ) {
 			chessboard[row][column] = 0;
 			visited[row * X + column] = false;
@@ -76,60 +76,59 @@ public class HorseChessboard {
 	}
 	
 	/**
-	 * ¹¦ÄÜ£º ¸ù¾İµ±Ç°Î»ÖÃ(Point¶ÔÏó)£¬¼ÆËãÂí¶ù»¹ÄÜ×ßÄÄĞ©Î»ÖÃ(Point)£¬²¢·ÅÈëµ½Ò»¸ö¼¯ºÏÖĞ(ArrayList), ×î¶àÓĞ8¸öÎ»ÖÃ
+	 * åŠŸèƒ½ï¼š æ ¹æ®å½“å‰ä½ç½®(Pointå¯¹è±¡)ï¼Œè®¡ç®—é©¬å„¿è¿˜èƒ½èµ°å“ªäº›ä½ç½®(Point)ï¼Œå¹¶æ”¾å…¥åˆ°ä¸€ä¸ªé›†åˆä¸­(ArrayList), æœ€å¤šæœ‰8ä¸ªä½ç½®
 	 * @param curPoint
-	 * @return
 	 */
 	public static ArrayList<Point> next(Point curPoint) {
-		//´´½¨Ò»¸öArrayList
+		//åˆ›å»ºä¸€ä¸ªArrayList
 		ArrayList<Point> ps = new ArrayList<Point>();
-		//´´½¨Ò»¸öPoint
+		//åˆ›å»ºä¸€ä¸ªPoint
 		Point p1 = new Point();
-		//±íÊ¾Âí¶ù¿ÉÒÔ×ß5Õâ¸öÎ»ÖÃ
+		//è¡¨ç¤ºé©¬å„¿å¯ä»¥èµ°5è¿™ä¸ªä½ç½®
 		if((p1.x = curPoint.x - 2) >= 0 && (p1.y = curPoint.y -1) >= 0) {
 			ps.add(new Point(p1));
 		}
-		//ÅĞ¶ÏÂí¶ù¿ÉÒÔ×ß6Õâ¸öÎ»ÖÃ
+		//åˆ¤æ–­é©¬å„¿å¯ä»¥èµ°6è¿™ä¸ªä½ç½®
 		if((p1.x = curPoint.x - 1) >=0 && (p1.y=curPoint.y-2)>=0) {
 			ps.add(new Point(p1));
 		}
-		//ÅĞ¶ÏÂí¶ù¿ÉÒÔ×ß7Õâ¸öÎ»ÖÃ
+		//åˆ¤æ–­é©¬å„¿å¯ä»¥èµ°7è¿™ä¸ªä½ç½®
 		if ((p1.x = curPoint.x + 1) < X && (p1.y = curPoint.y - 2) >= 0) {
 			ps.add(new Point(p1));
 		}
-		//ÅĞ¶ÏÂí¶ù¿ÉÒÔ×ß0Õâ¸öÎ»ÖÃ
+		//åˆ¤æ–­é©¬å„¿å¯ä»¥èµ°0è¿™ä¸ªä½ç½®
 		if ((p1.x = curPoint.x + 2) < X && (p1.y = curPoint.y - 1) >= 0) {
 			ps.add(new Point(p1));
 		}
-		//ÅĞ¶ÏÂí¶ù¿ÉÒÔ×ß1Õâ¸öÎ»ÖÃ
+		//åˆ¤æ–­é©¬å„¿å¯ä»¥èµ°1è¿™ä¸ªä½ç½®
 		if ((p1.x = curPoint.x + 2) < X && (p1.y = curPoint.y + 1) < Y) {
 			ps.add(new Point(p1));
 		}
-		//ÅĞ¶ÏÂí¶ù¿ÉÒÔ×ß2Õâ¸öÎ»ÖÃ
+		//åˆ¤æ–­é©¬å„¿å¯ä»¥èµ°2è¿™ä¸ªä½ç½®
 		if ((p1.x = curPoint.x + 1) < X && (p1.y = curPoint.y + 2) < Y) {
 			ps.add(new Point(p1));
 		}
-		//ÅĞ¶ÏÂí¶ù¿ÉÒÔ×ß3Õâ¸öÎ»ÖÃ
+		//åˆ¤æ–­é©¬å„¿å¯ä»¥èµ°3è¿™ä¸ªä½ç½®
 		if ((p1.x = curPoint.x - 1) >= 0 && (p1.y = curPoint.y + 2) < Y) {
 			ps.add(new Point(p1));
 		}
-		//ÅĞ¶ÏÂí¶ù¿ÉÒÔ×ß4Õâ¸öÎ»ÖÃ
+		//åˆ¤æ–­é©¬å„¿å¯ä»¥èµ°4è¿™ä¸ªä½ç½®
 		if ((p1.x = curPoint.x - 2) >= 0 && (p1.y = curPoint.y + 1) < Y) {
 			ps.add(new Point(p1));
 		}
 		return ps;
 	}
 
-	//¸ù¾İµ±Ç°Õâ¸öÒ»²½µÄËùÓĞµÄÏÂÒ»²½µÄÑ¡ÔñÎ»ÖÃ£¬½øĞĞ·Çµİ¼õÅÅĞò, ¼õÉÙ»ØËİµÄ´ÎÊı
+	//æ ¹æ®å½“å‰è¿™ä¸ªä¸€æ­¥çš„æ‰€æœ‰çš„ä¸‹ä¸€æ­¥çš„é€‰æ‹©ä½ç½®ï¼Œè¿›è¡Œéé€’å‡æ’åº, å‡å°‘å›æº¯çš„æ¬¡æ•°
 	public static void sort(ArrayList<Point> ps) {
 		ps.sort(new Comparator<Point>() {
 
 			@Override
 			public int compare(Point o1, Point o2) {
 				// TODO Auto-generated method stub
-				//»ñÈ¡µ½o1µÄÏÂÒ»²½µÄËùÓĞÎ»ÖÃ¸öÊı
+				//è·å–åˆ°o1çš„ä¸‹ä¸€æ­¥çš„æ‰€æœ‰ä½ç½®ä¸ªæ•°
 				int count1 = next(o1).size();
-				//»ñÈ¡µ½o2µÄÏÂÒ»²½µÄËùÓĞÎ»ÖÃ¸öÊı
+				//è·å–åˆ°o2çš„ä¸‹ä¸€æ­¥çš„æ‰€æœ‰ä½ç½®ä¸ªæ•°
 				int count2 = next(o2).size();
 				if(count1 < count2) {
 					return -1;
