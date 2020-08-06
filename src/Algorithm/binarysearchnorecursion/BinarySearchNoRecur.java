@@ -3,31 +3,30 @@ package Algorithm.binarysearchnorecursion;
 public class BinarySearchNoRecur {
 
 	public static void main(String[] args) {
-		//²âÊÔ
+		//æµ‹è¯•
 		int[] arr = {1,3, 8, 10, 11, 67, 100};
 		int index = binarySearch(arr, 100);
 		System.out.println("index=" + index);//
 	}
 	
-	//¶ş·Ö²éÕÒµÄ·Çµİ¹éÊµÏÖ
+	//äºŒåˆ†æŸ¥æ‰¾çš„éé€’å½’å®ç°
 	/**
-	 * 
-	 * @param arr ´ı²éÕÒµÄÊı×é, arrÊÇÉıĞòÅÅĞò
-	 * @param target ĞèÒª²éÕÒµÄÊı
-	 * @return ·µ»Ø¶ÔÓ¦ÏÂ±ê£¬-1±íÊ¾Ã»ÓĞÕÒµ½
+	 * @param arr å¾…æŸ¥æ‰¾çš„æ•°ç»„, arræ˜¯å‡åºæ’åº
+	 * @param target éœ€è¦æŸ¥æ‰¾çš„æ•°
+	 * @return è¿”å›å¯¹åº”ä¸‹æ ‡ï¼Œ-1è¡¨ç¤ºæ²¡æœ‰æ‰¾åˆ°
 	 */
 	public static int binarySearch(int[] arr, int target) {
 		
 		int left = 0;
 		int right = arr.length - 1;
-		while(left <= right) { //ËµÃ÷¼ÌĞø²éÕÒ
+		while(left <= right) { //è¯´æ˜ç»§ç»­æŸ¥æ‰¾
 			int mid = (left + right) / 2;
 			if(arr[mid] == target) {
 				return mid;
 			} else if ( arr[mid] > target) {
-				right = mid - 1;//ĞèÒªÏò×ó±ß²éÕÒ
+				right = mid - 1;//éœ€è¦å‘å·¦è¾¹æŸ¥æ‰¾
 			} else {
-				left = mid + 1; //ĞèÒªÏòÓÒ±ß²éÕÒ
+				left = mid + 1; //éœ€è¦å‘å³è¾¹æŸ¥æ‰¾
 			}
 		}
 		return -1;
